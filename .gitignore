@@ -1,0 +1,21 @@
+# 编译输出
+out/
+bin/
+*.class
+*.jar
+!mysql-connector-*.jar
+
+# 数据库配置（含密码，不提交）
+db.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
