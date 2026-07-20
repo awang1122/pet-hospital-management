@@ -115,5 +115,4 @@ java -cp "out;.;mysql-connector-java-8.0.33.jar" pet.ui.PetHospitalGUI
 
 ## 作者
 
-- 昂翁曲绕 24090057
-- 计算机科学与技术 24级
+- [awang1122](https://github.com/awang1122)
