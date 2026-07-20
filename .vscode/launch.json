@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "PetHospitalGUI",
+            "request": "launch",
+            "mainClass": "pet.ui.PetHospitalGUI",
+            "projectName": "pet-hospital-2",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

@@ -8,12 +8,9 @@ bin/
 # 数据库配置（含密码，不提交）
 db.properties
 
-# IDE
+# IDE（其他 IDE 的本地配置）
 .idea/
 *.iml
-.vscode/
-.project
-.classpath
 .settings/
 
 # OS

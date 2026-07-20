@@ -27,28 +27,30 @@ public class DatabaseConfig {
     }
 
     private void loadConfig() {
-        try (InputStream input = getClass().getClassLoader()
+        Properties props = new Properties();
+
+        // 尝试从 classpath 加载
+        try (InputStream in = getClass().getClassLoader()
                 .getResourceAsStream("db.properties")) {
-            if (input == null) {
-                // 回退到与 src 同级的 db.properties
-                input = getClass().getClassLoader()
-                        .getResourceAsStream("../../db.properties");
+            if (in != null) {
+                props.load(in);
             }
-            Properties props = new Properties();
-            if (input != null) {
-                props.load(input);
+        } catch (Exception ignored) {}
+
+        // classpath 没找到，尝试从文件系统加载（Eclipse/VSCode 运行兼容）
+        if (props.isEmpty()) {
+            java.io.File file = new java.io.File("db.properties");
+            if (file.exists()) {
+                try (java.io.FileInputStream fin = new java.io.FileInputStream(file)) {
+                    props.load(fin);
+                } catch (Exception ignored) {}
             }
-            url = props.getProperty("db.url",
-                    "jdbc:mysql://localhost:3306/pet_hospital?useSSL=false&serverTimezone=UTC");
-            user = props.getProperty("db.user", "root");
-            password = props.getProperty("db.password", "");
-        } catch (Exception e) {
-            // 使用默认值
-            url = "jdbc:mysql://localhost:3306/pet_hospital?useSSL=false&serverTimezone=UTC";
-            user = "root";
-            password = "";
-            System.err.println("警告：无法加载 db.properties，使用默认配置");
         }
+
+        url = props.getProperty("db.url",
+                "jdbc:mysql://localhost:3306/pet_hospital?useSSL=false&serverTimezone=UTC");
+        user = props.getProperty("db.user", "root");
+        password = props.getProperty("db.password", "");
     }
 
     public Connection getConnection() throws SQLException {
